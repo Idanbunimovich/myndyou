@@ -1,7 +1,8 @@
 import sys
-sys.path.insert(1, 'C:/Users/idan/PycharmProjects/nlp_dev/data-layer/lib')
-sys.path.insert(2, 'C:/Users/idan/PycharmProjects/nlp_dev/data-layer/model')
-sys.path.insert(3, 'C:/Users/idan/PycharmProjects/nlp_dev/api/controllers')
+import os
+sys.path.insert(1, os.environ.get('LIB_FOLDER_LOCATION'))
+sys.path.insert(2, os.environ.get('MODEL_FOLDER_LOCATION'))
+sys.path.insert(3, os.environ.get('CONTROLLERS_FOLDER_LOCATION'))
 from fastapi import FastAPI, File, Depends, UploadFile
 import controllers
 import schemas
