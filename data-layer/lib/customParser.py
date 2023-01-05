@@ -37,3 +37,4 @@ def parse_json(base):
         result.append(dict)
     print(result)
     return result
+

@@ -40,11 +40,12 @@ class Patient(Base):
         for patient in patients:
             new_patient = Patient(status=1)
             new_patient.patient_phones = []
+
             for phone in patient["phones"]:
                 new_patient.patient_phones.append(PatientPhone(phone_number=phone["phone_number"], type=phone["type"]))
             new_patient.patient_details.append(PatientDetails(first_name=patient["first_name"],
                                                                     last_name=patient["last_name"],
-                                                                    date_of_birth=datetime.datetime(1995, 1, 21)))
+                                                                    date_of_birth=datetime.datetime.strptime(patient["date_of_birth"], '%Y-%d-%m'))
             session.add(new_patient)
         session.commit()
         return patients
