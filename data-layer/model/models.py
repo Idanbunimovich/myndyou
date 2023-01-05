@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Enum
 import enum
 from sqlalchemy.orm import relationship
-import sys
-sys.path.insert(1, 'C:/Users/idan/PycharmProjects/nlp_dev/data-layer/lib')
 from db import Base, session_factory
 from sqlalchemy.sql import func
 import datetime
