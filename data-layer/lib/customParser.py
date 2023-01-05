@@ -1,7 +1,6 @@
 import csv
 from tempfile import NamedTemporaryFile
 
-
 def parse_csv(file):
     rows = []
     temp = NamedTemporaryFile(delete=False)
@@ -18,23 +17,6 @@ def parse_csv(file):
             dict = {}
             for property in header:
                 dict[property] = row[index]
-            dict['phones'] = [{'phone_number': dict['phone'], 'type': dict['type']}]
             rows.append(dict)
-    print(rows)
     return rows
-
-
-def parse_json(base):
-    result = []
-    for patient in base.patients:
-        dict = {}
-        dict['phones'] = []
-        dict['first_name'] = patient.details.first_name
-        dict['last_name'] = patient.details.last_name
-        dict['date_of_birth'] = patient.details.date_of_birth
-        for phone in patient.phones:
-            dict['phones'].append({'type': phone.type, 'phone_number': phone.phone_number})
-        result.append(dict)
-    print(result)
-    return result
 

@@ -1,13 +1,13 @@
-from customParser import parse_csv, parse_json
+
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from fastapi import HTTPException
 import models
 
 
-def upload(patients, file):
+def upload(request_body, file):
     try:
-        patients = parse_csv(file) if file else parse_json(patients)
+        patients = models.Patient.convert_csv_data_to_patients(file) if file else models.Patient.convert_request_data_to_patients(request_body)
         models.Patient.save_patients(patients)
         json_compatible_item_data = jsonable_encoder(patients)
         return JSONResponse(content=json_compatible_item_data)

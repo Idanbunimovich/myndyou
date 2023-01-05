@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from db import Base, session_factory
 from sqlalchemy.sql import func
 import datetime
+from customParser import parse_csv, parse_json
 
 
 class PhoneType(enum.Enum):
@@ -49,6 +50,27 @@ class Patient(Base):
             session.add(new_patient)
         session.commit()
         return patients
+
+    @staticmethod
+    def convert_request_data_to_patients(base):
+        result = []
+        for patient in base.patients:
+            dict = {}
+            dict['phones'] = []
+            dict['first_name'] = patient.details.first_name
+            dict['last_name'] = patient.details.last_name
+            dict['date_of_birth'] = patient.details.date_of_birth
+            for phone in patient.phones:
+                dict['phones'].append({'type': phone.type, 'phone_number': phone.phone_number})
+            result.append(dict)
+        return result
+
+
+    @staticmethod
+    def convert_csv_data_to_patients(file):
+        dict = parse_csv(file)
+        dict['phones'] = [{'phone_number': dict['phone'], 'type': dict['type']}]
+        return dict
 
 
 
