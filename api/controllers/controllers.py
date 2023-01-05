@@ -9,6 +9,8 @@ def upload(patients, file):
     try:
         patients = parse_csv(file) if file else parse_json(patients)
         models.Patient.save_patients(patients)
+        json_compatible_item_data = jsonable_encoder(patients)
+        return JSONResponse(content=json_compatible_item_data)
     except:
         raise HTTPException(status_code=500, detail="Failed to upload")
 

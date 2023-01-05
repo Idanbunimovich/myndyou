@@ -47,7 +47,7 @@ class Patient(Base):
                                                                     date_of_birth=datetime.datetime(1995, 1, 21)))
             session.add(new_patient)
         session.commit()
-        return True
+        return patients
 
 
 
