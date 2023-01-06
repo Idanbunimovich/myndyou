@@ -14,6 +14,8 @@ class Patient(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     status = Column(Integer)
     date_created = Column(DateTime(timezone=True), default=func.now())
+    patient_details = relationship("PatientDetails", back_ref="patients_details")
+    patient_phones = relationship("PatientPhone", back_ref="patients_phones")
 
 
 class PatientDetails(Base):
@@ -23,7 +25,6 @@ class PatientDetails(Base):
     first_name = Column(String(16))
     last_name = Column(String(16))
     date_of_birth = Column(DateTime, nullable=True)
-    patients = relationship("Patient", back_ref="patients")
 
 
 class PatientPhone(Base):
@@ -32,5 +33,4 @@ class PatientPhone(Base):
     patient_id = Column(Integer, ForeignKey("patients.id"))
     phone_number = Column(String(30))
     type = Column(Enum(PhoneType))
-    patients = relationship("Patient", back_ref="patients")
 
