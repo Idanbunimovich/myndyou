@@ -7,8 +7,11 @@ class Patient(base):
     def __init__(self, model):
         super().__init__(model)
 
-    def insert(self, patients):
-        return super(Patient, self).insert(Patient.prepare_patients_for_save(patients))
+    def insert(self, patients, session):
+        patients_obj = Patient.prepare_patients_for_save(patients)
+        super(Patient, self).insert(patients_obj)
+        session.refresh(patients_obj)
+        return patients_obj
 
     def get_patient_by_id(self, id):
         return self.get(id, [models.Patient.id == id])
