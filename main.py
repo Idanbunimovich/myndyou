@@ -1,11 +1,6 @@
-import sys
-import os
-sys.path.insert(1, os.environ.get('LIB_FOLDER_LOCATION'))
-sys.path.insert(2, os.environ.get('MODEL_FOLDER_LOCATION'))
-sys.path.insert(3, os.environ.get('CONTROLLERS_FOLDER_LOCATION'))
-from fastapi import FastAPI, File, Depends, UploadFile
-import controllers
-import schemas
+from fastapi import FastAPI, Depends, UploadFile
+import api.controllers.controllers as controllers
+import data_layer.model.schemas as schemas
 from typing import Union
 import uvicorn
 
@@ -13,7 +8,7 @@ app = FastAPI()
 
 
 @app.get("/patient")
-async def get_patient(id):
+async def get_patient(id: schemas.PydanticPatientId):
     controllers.get_patient(id)
 
 @app.post("/patient")
