@@ -11,7 +11,7 @@ class Base:
         if len(filter_arr):
             query = query.filter(and_(*filter_arr))
         return query.first()
-        session.close()
+
 
     @DB.append_session
     def insert(self, items, session):
