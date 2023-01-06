@@ -22,6 +22,7 @@ class DB:
                 func(*args, session)
             except:
                 session.rollback()
-                session.close()
                 raise Exception("Request to sql failed")
-            session.close()
+            finally:
+                session.close()
+
