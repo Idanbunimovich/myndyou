@@ -1,7 +1,7 @@
 import base
 import models
 import datetime
-from data_layer.lib.customParser import parse_csv
+from data_layer.lib.custom_parser import parse_csv
 
 class Patient(base):
     def __init__(self, model):
