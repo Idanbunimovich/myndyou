@@ -2,7 +2,7 @@ import base
 import models
 import datetime
 from data_layer.lib.custom_parser import parse_csv
-from data_layer.lib.db import DB
+
 
 class Patient(base):
     def __init__(self, model):
