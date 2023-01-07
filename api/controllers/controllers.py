@@ -14,7 +14,7 @@ def upload(request_body, file):
 
 def get_patient(id):
     try:
-        patient = Patient(models.Patient).get_patient_by_id(id)
+        patient = Patient(models.Patient).get_by_id(id)
         if not patient:
             raise HTTPException(status_code=404, detail="Patient not found")
         return patient

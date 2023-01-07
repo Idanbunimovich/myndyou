@@ -13,9 +13,6 @@ class Patient(base):
         result = super(Patient, self).insert(patients)
         return result
 
-    def get_patient_by_id(self, id):
-        return self.get(id, [models.Patient.id == id])
-
     @staticmethod
     def prepare_patients_for_save(patients):
         result = []

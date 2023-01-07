@@ -1,17 +1,13 @@
 from data_layer.lib.db import DB
-from sqlalchemy import and_
 
 class Base:
     def __init__(self, model):
        self.model = model
 
-    def get(self, filter_arr):
+    def get_by_id(self, id):
         session = DB.session_factory()
         try:
-            query = session.query(self.model)
-            if len(filter_arr):
-                query = query.filter(and_(*filter_arr))
-                return query.first()
+            return session.filter(self.model.id == id).first()
         except:
             raise Exception("Request to sql failed")
         finally:
