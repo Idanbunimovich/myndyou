@@ -14,15 +14,6 @@ class DB:
         Base.metadata.create_all(engine)
         return _SessionFactory()
 
-    @staticmethod
-    def append_session(func):
-        def wrapper(*args):
-            session = DB.session_factory()
-            try:
-                func(*args, session)
-            except:
-                session.rollback()
-                raise Exception("Request to sql failed")
-            finally:
-                session.close()
+
+
 

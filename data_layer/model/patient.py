@@ -2,16 +2,16 @@ import base
 import models
 import datetime
 from data_layer.lib.custom_parser import parse_csv
+from data_layer.lib.db import DB
 
 class Patient(base):
     def __init__(self, model):
         super().__init__(model)
 
-    def insert(self, patients, session):
-        patients_obj = Patient.prepare_patients_for_save(patients)
-        super(Patient, self).insert(patients_obj)
-        session.refresh(patients_obj)
-        return patients_obj
+    def insert(self, patients):
+        patients = Patient.prepare_patients_for_save(patients)
+        super(Patient, self).insert(patients)
+        return patients
 
     def get_patient_by_id(self, id):
         return self.get(id, [models.Patient.id == id])
