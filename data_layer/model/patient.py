@@ -10,8 +10,8 @@ class Patient(base):
 
     def insert(self, patients):
         patients = Patient.prepare_patients_for_save(patients)
-        super(Patient, self).insert(patients)
-        return patients
+        result = super(Patient, self).insert(patients)
+        return result
 
     def get_patient_by_id(self, id):
         return self.get(id, [models.Patient.id == id])
